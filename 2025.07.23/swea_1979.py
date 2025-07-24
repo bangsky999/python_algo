@@ -6,7 +6,7 @@ for tc in range(1, T + 1):
 
     answer = 0  # 정답: 단어가 들어갈 수 있는 자리 수
 
-    # ▶ 가로 방향 검사
+    # 가로 방향 검사
     for i in range(N):
         row = [0] + puzzle[i] + [0]  # 앞뒤에 0 추가
         count = 0
@@ -18,7 +18,7 @@ for tc in range(1, T + 1):
                     answer += 1  # 정확히 K칸이면 정답
                 count = 0  # 0을 만나면 초기화
 
-    # ▶ 세로 방향 검사
+    # 세로 방향 검사
     for j in range(N):
         col = [0] + [puzzle[i][j] for i in range(N)] + [0]  # 앞뒤에 0 추가
         count = 0
