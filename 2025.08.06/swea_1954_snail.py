@@ -1,6 +1,6 @@
 ### 나는 달팽이한테 졌다 ### 
-import sys
-sys.stdin = open("input.txt")
+# import sys
+# sys.stdin = open("input.txt")
 
 # 방향 순서는 우, 아래, 좌, 위
 dr = [0,1,0,-1]
