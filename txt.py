@@ -1,20 +1,21 @@
+# A = 1~12까지 집합이다, A의 부분집합이 N개 원소, 그 부분집합의 합이 K개인 부분집합 개수 구하기
+# 일단 12일때 부분집합을 다 구하고 , 2*12 만들고 
+# 부분집합 전체를 순회하면서 N개, 합이 K인거 찾기, 없으면 0출력
 import sys
 sys.stdin = open("input.txt")
 
+A = list(range(1, 13))
 T = int(input())
 for tc in range(1, T+1):
-    N = int(input())
-    arr = list(map(int, input().split()))
+    N, K = map(int, input().split())
+    cnt = 0
 
-    # 선택 정렬 사용
-    for i in range(N-1): # 맨 뒤는 정렬안해도 자동으로 된다
-        min_idx = i # 맨앞 i 인덱스를 최소라 가정 
-        for j in range(i+1, N): # i 다음부터 N 끝까지 탐색
-            if arr[min_idx] > arr[j]:
-                min_idx = j # 탐색하면서 최소 j 값을 찾아서 min_idx에 쓰겠다
+    for i in range(1<<12): # 1~2^12까지 모든 부분집합 나타냄
+        arr = [] # 부분집합마다 리스트를 만들어서
+        for j in range(12):
+            if i & (1<<j): # j번째 비트가 1이라면 
+                arr.append(A[j]) # arr에 비트가 1인 놈을 추가할게요
 
-        arr[i], arr[min_idx] = arr[min_idx], arr[i] # 연산 줄이기 위해 빼기
-    print(f'#{tc}', end = ' ')
-    for i in arr:
-        print(i, end = ' ')
-    print()
+        if len(arr) == N and sum(arr) == K:
+            cnt += 1
+    print(f'#{tc} {cnt}')

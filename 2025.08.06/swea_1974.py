@@ -6,7 +6,7 @@ for tc in range(1, T+1):
     arr = [list(map(int, input().split())) for _ in range(9)]
     value = 1
 
-    # 검증 1
+    # 검증 1 
     for r in range(9):
         test_set = set()
         for c in range(9):
