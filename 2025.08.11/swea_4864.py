@@ -2,23 +2,23 @@ import sys
 sys.stdin = open("input.txt")
 
 def bruteforce(p,t):
-    # p 찾을 패턴, t 본문 문자열
-    i = 0 # t의 인덱스
-    j = 0 # p의 인덱스
+# p는 패턴, t는 본문
+    i = 0 # t
+    j = 0 # p
     M = len(p)
     N = len(t)
-    while j < M and i < N:
+    
+    while i < N and j < M:
         if t[i] != p[j]:
-            i = i - j
+            i = i -j
             j = -1
-        i = i + 1
-        j = j + 1
-    if j == M: # j값은 맞춘 글자 개수가 됨 !
+        i += 1
+        j += 1
+    if j == M:
         return 1
-        # return i - M
     else:
-        return 0 
-
+        return 0
+    
 T = int(input())
 for tc in range(1, T+1):
     p = input()

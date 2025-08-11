@@ -11,6 +11,7 @@ for tc in range(1, T+1):
 
     for i in range(len(arr)):
         counts[arr[i]] += 1
+        
     for i in range(1,10):
         counts[i] += counts[i-1]
 

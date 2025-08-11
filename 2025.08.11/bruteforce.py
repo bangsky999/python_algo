@@ -10,9 +10,11 @@ def bruteforce(p,t):
             j = -1 # j는 -1으로 돌림
         i = i + 1 # i의 다음칸
         j = j + 1 # j의 다음칸 
-    if j == M: return i - M # j값은 맞춘 글자 개수가 됨 !
-    else: return - 1 
-        # return i - M
+    if j == M: 
+        return i - M # j값은 맞춘 글자 개수가 됨 !
+    else: 
+        return - 1 
+
     
 t = 'TTTTTATTAATA'
 p = 'TTA'
