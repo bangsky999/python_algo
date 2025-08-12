@@ -12,3 +12,7 @@ for tc in range(1, T+1):
             i += 1
     res = len(t) - len(p)*cnt + cnt
     print(f'#{tc} {res}')
+
+
+
+    ################ 미완

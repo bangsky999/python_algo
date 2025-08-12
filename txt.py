@@ -1,20 +1,23 @@
-def bruteforce(p,t): 
-# p 찾을 패턴, t 본문 문자열, 패턴이 있으면 인덱스, 없으면 -1 리턴
-    i = 0 # t의 인덱스
-    j = 0 # p의 인덱스
-    M = len(p)
-    N = len(t)
-    while j < M and i < N:
-        if t[i] != p[j]: # 만약 문자열이 다르면
-            i = i - j # i를 원래 위치로 되돌림
-            j = -1 # j는 -1으로 돌림
-        i = i + 1 # i의 다음칸
-        j = j + 1 # j의 다음칸 
-    if j == M: return i - M # j값은 맞춘 글자 개수가 됨 !
-    else: return - 1 
-        # return i - M
-    
-t = 'TTTTTATTAATA'
-p = 'TTA'
-
-print(bruteforce(p, t))
+T = int(input())
+ 
+ 
+def delete_repetition(text):
+    found = False
+    idx = -1
+    for i in range(len(text)-1):
+        if text[i] == text[i+1]:
+            found = True
+            idx = i
+            break
+ 
+    if found:
+        return delete_repetition(text[:idx]+text[idx+2:])
+    else:
+        return text
+ 
+ 
+for tc in range(1, T+1):
+    text = input().strip()
+ 
+    # ans = delete_repetition(text)
+    print(f"#{tc} {len(delete_repetition(text))}")
