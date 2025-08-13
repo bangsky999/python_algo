@@ -13,6 +13,12 @@ def pal(txt): # 회문검사
             
     if val == 1:
         return txt
+# # 좀 더 줄일 수 있을까?
+# def pal(txt):
+#     for i in range(len(txt) // 2):
+#         if txt[i] != txt[-i-1]:
+#             return False
+#     return True
         
 for tc in range(1, 11):
     N = int(input())
