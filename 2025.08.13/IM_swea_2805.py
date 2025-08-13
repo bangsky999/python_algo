@@ -10,15 +10,11 @@ for tc in range(1, T+1):
     mid = N//2 # 중간값
     
     for r in range(mid+1):
-        for c in range(0,mid+1):
-            lst = arr[r][mid-c:mid+c+1]
-            for i in lst:
-                cnt += i
-    ######### print
+        lst = arr[r][mid-r:mid+r+1]
+        cnt += sum(lst)
+
     for r in range(mid+1,N):
-        for c in range(mid-1, -1, -1):
-            lst =  arr[r][mid-c:mid+c+1]
-            for i in lst:
-                cnt += i
+        lst = arr[r][mid-(N-1-r):mid+(N-1-r)+1] # 폭의 절반 길이만큼
+        cnt += sum(lst)
 
     print(f'#{tc} {cnt}')
