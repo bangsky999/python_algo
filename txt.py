@@ -1,25 +1,27 @@
-arr = [1,2,3,4,5]
+from collections import deque
 
-# 부분집합
-# - 각 원소를 포함할 것인가? 포함하지 않을 것인가?
-# - 비트마스킹(0 or 1)
+T = int(input())
+for tc in range(1, T+1):
+    N, M = map(int, input().split()) # N: 화덕수, M: 피자
+    cheeses = list(map(int, input().split()))
 
-N = len(arr)
-out = [False]*N # 출력배열(해당 위치 포함 여부)
+    nums = list(range(1,M+1))
+    pizzas = list(zip(nums, cheeses))
 
-def f(idx):
-    # 기저조건
-    if idx == N: 
-        for i in range(N):
-            if out[i]:
-                print(arr[i], end = ' ')
-        print()
-        return
-    
-    # 유도조건 (N-1)까지는 뽑을지 말지 결정가능.
-    out[idx] = True # idx번째 부분집합에 포함시키고 
-    f(idx+1) # idx+1 번째 결정하러 가기
-    out[idx] = False # idx번쨰를 포함시키지 말고
-    f(idx+1) # idx+1 번째 결정하러 가기
+    q = deque()
+    for _ in range(N):
+        q.append(pizzas.pop(0))
 
-f(0)
+    while len(q) > 1: # 일단 true로
+
+        num, cheese = q.popleft()
+        cheese = cheese // 2
+
+        if cheese == 0 and pizzas:
+            q.append(pizzas.pop(0))
+        elif cheese > 0:
+            q.append((num, cheese))
+
+    num, cheese = q.popleft()
+
+    print(f'#{tc} {num}')
