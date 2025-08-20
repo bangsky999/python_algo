@@ -1,27 +1,27 @@
-from collections import deque
-
 T = int(input())
+
 for tc in range(1, T+1):
-    N, M = map(int, input().split()) # N: 화덕수, M: 피자
-    cheeses = list(map(int, input().split()))
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
 
-    nums = list(range(1,M+1))
-    pizzas = list(zip(nums, cheeses))
+    visited = [False]*N # 열을 썼는지 표시
+    min_sum = 10000000000
 
-    q = deque()
-    for _ in range(N):
-        q.append(pizzas.pop(0))
+    def f(idx, cur_sum): 
+        global min_sum
+        if idx == N:
+            if cur_sum < min_sum:
+                min_sum = cur_sum
+            return
+        
+        if cur_sum >= min_sum:
+            return
+        
+        for i in range(N):
+            if not visited[i]:
+                visited[i] = True
+                f(idx+1, cur_sum + arr[idx][i])
+                visited[i] = False
 
-    while len(q) > 1: # 일단 true로
-
-        num, cheese = q.popleft()
-        cheese = cheese // 2
-
-        if cheese == 0 and pizzas:
-            q.append(pizzas.pop(0))
-        elif cheese > 0:
-            q.append((num, cheese))
-
-    num, cheese = q.popleft()
-
-    print(f'#{tc} {num}')
+    f(0,0)
+    print(f'#{tc} {min_sum}')
