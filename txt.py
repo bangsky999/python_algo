@@ -1,36 +1,16 @@
-T = int(input())
-def winner(l, r):
-    global cards
+V = int(input()) # 정점의 개수, 정점번호는 1번부터 V번까지
+arr = list(map(int, input().split()))
 
-    if l == r:
-        return l
-    
-    mid = (l+r)//2
+lft_child = [0] * (V+1) # 1 ~ V까지 인덱스가 필요하므로
+rgt_child = [0] * (V+1)
 
-    l_winner = winner(l, mid)
-    r_winner = winner(mid+1, r)
+for i in range(V-1):
+    parent, child = arr[2*i], arr[2*i + 1]
+    print(parent, child)
+    if lft_child[parent] == 0:
+        lft_child[parent] = child
+    else:
+        rgt_child[parent] = child
 
-    if cards[l_winner] == cards[r_winner]:
-        return l_winner
-    
-    if cards[l_winner] == 1:
-        if cards[r_winner] == 2:
-            return r_winner
-        elif cards[r_winner] == 3:
-            return l_winner
-    elif cards[l_winner] == 2:
-        if cards[r_winner] == 1:
-            return l_winner
-        elif cards[r_winner] == 3:
-            return r_winner
-    elif cards[l_winner] == 3:
-        if cards[r_winner] == 1:
-            return r_winner
-        elif cards[r_winner] == 2:
-            return l_winner
-        
-for tc in range(1, T+1):
-    N = int(input())
-    cards = [0] + list(map(int, input().split()))
-    num = winner(1, N)
-    print(f'#{tc} {num}')
+print(lft_child)
+print(rgt_child)
