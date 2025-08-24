@@ -1,16 +1,26 @@
-V = int(input()) # 정점의 개수, 정점번호는 1번부터 V번까지
-arr = list(map(int, input().split()))
+N = int(input())
 
-lft_child = [0] * (V+1) # 1 ~ V까지 인덱스가 필요하므로
-rgt_child = [0] * (V+1)
+new_num = ''
+cnt = 0
 
-for i in range(V-1):
-    parent, child = arr[2*i], arr[2*i + 1]
-    print(parent, child)
-    if lft_child[parent] == 0:
-        lft_child[parent] = child
-    else:
-        rgt_child[parent] = child
+if cnt == 0:
+    if N < 10:
+        total = 0 + N # 01
+        new_num = str(N) + str(total)[-1] # 11
+        cnt += 1
+    elif N >= 10:
+        total = int(str(N)[0]) + int(str(N)[1])
+        new_num = str(N)[1] + str(total)[-1]
+        cnt += 1
+if cnt > 0:
+    while N != int(new_num):
+        if int(new_num) < 10:
+            total = 0 + int(new_num)
+            new_num = str(new_num) + str(total)[-1]
+            cnt += 1
+        elif int(new_num) >= 10:
+            total = int(str(new_num)[0]) + int(str(new_num)[1]) 
+            new_num = str(new_num)[1] + str(total)[-1]
+            cnt += 1
 
-print(lft_child)
-print(rgt_child)
+print(cnt)
