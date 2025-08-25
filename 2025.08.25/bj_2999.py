@@ -11,14 +11,21 @@
 word = list(input()) # 'koaski'
 N = len(word) # N = 6
 
-if N % 2 == 0: # 짝수면
-    r, c = (N//2)-1, N//2
-elif N//2 == 1: # 홀수면
-    r, c = N//2, N//2
-################# 미완
+lst = []
+for i in range(1,N+1):
+    if N % i == 0:
+        lst.append(i)
+
+len_lst = len(lst)
+
+if len_lst % 2 == 0: # 짝수면
+    r, c = (len_lst//2)-1, len_lst//2
+elif len_lst %2 == 1: # 홀수면
+    r, c = len_lst//2, len_lst//2 
+
 real_word = []
-for i in range(r):
-    for j in range(i,N,r): # 
+for i in range(lst[r]):
+    for j in range(i,N,lst[r]): # 
         real_word.append(word[j])
-################# 미완
-print(real_word)
+
+print(''.join(real_word))
