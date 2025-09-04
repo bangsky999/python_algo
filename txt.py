@@ -1,23 +1,39 @@
-# 주사위 누적합을 이용하는 버전
-res = []
-result = 0
-
-def f(cnt, total):
-    global result
-
-    if total > 10:
-        return
+# 10진수를 2진수로 변환
+'''
+2진수를 문자열로 출력하자
+빈 문자열을 만들고 입력받은 10진수를 계속 2로 나누며 문자열에 추가
+'''
+def decimal_to_binary(n):
+    binary_num = ''
+    if n == 0:
+        return '0'
     
-    if cnt == 3:
-        if total <= 10:
-            result += 1
-            print(res)
-        return
+    while n > 0:
+        remain = n % 2
+        binary_num = str(remain) + binary_num
 
-    for num in range(1, 7):
-        res.append(num)
-        f(cnt + 1, total + num)
-        res.pop()
+        n = n // 2
+    
+    return binary_num
+
+print(decimal_to_binary(144))
 
 
-f(0, 0)
+# 2진수를 10진수로 변환
+'''
+문자열을 숫자로 출력하자
+how? 2의 ~승 곱해서 0부터 
+'''
+def binary_to_decimal(bin_num):
+    decimal = 0
+    pow = 0
+
+    for i in reversed(bin_num): # 1 0 1 1 1
+        if i == '1':
+            decimal += 2 ** pow
+
+        pow += 1
+
+    return decimal
+
+print(binary_to_decimal('11101'))
