@@ -1,26 +1,35 @@
+import sys;sys.stdin = open("input.txt")
 '''
-4831. [파이썬 S/W 문제해결 기본] 1일차 - 전기버스
-9367. 점점 커지는 당근의 개수
-6190. 정곤이의 단조 증가하는 수
-2회차 월말평가 3번
-
-스택과 큐의 정의와 차이점
-- 스택: 후입선출 구조, DFS에 사용
-- 큐: 선입선출 구조, BFS에 사용
-
-깊이우선 탐색 vs 너비 우선 탐색 vs 백트래킹 차이점
-- DFS는 모든 경로를 추적하며, 모든 경우의 수를 확인한다.
-- BFS는 시작 노드에서 가까운 경로부터 탐색, 최단거리문제에 사용
-- 백트래킹은 불필요한 경로를 조기에 차단한다.
+idx를 증가시키면서 col을 검사
 '''
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int,input().split())) for _ in range(N)]
 
+    visited = [0]*N
+    min_sum = float('inf')
 
+    def f(idx, cost):
+        global min_sum, visited
+        # 종료 조건
+        if idx == N:
+            min_sum = min(cost, min_sum)
+            return
+        
+        # 가지치기
+        if cost >= min_sum:
+            return
+        
+        # 유도조건
+        for num in range(N):
+            if visited[num]:
+                continue
+            
+            # 방문하지 않았다면
+            visited[num] = 1
+            f(idx + 1, cost + arr[idx][num])
+            visited[num] = 0
 
-'''
-스택과 큐의 정의와 차이점
-
-
-깊이우선 탐색 vs 너비 우선 탐색 vs 백트래킹 차이점
-
-'''
-
+    f(0, 0)
+    print(f'#{tc} {min_sum}')
