@@ -1,3 +1,21 @@
+'''
+union
+
+1. 각 집합을 만들어주는 함수만들기
+make_set
+- 대표자, rank 설정
+
+2. 대표자를 찾는 함수만들기
+find_set
+
+3. 두 집합을 합치는 함수
+union
+- x, y의 대표자를 찾고
+    - 같은 집합이면 pass
+- 덩치가 저 작은 집합이 큰 집합 밑으로 가야한다.
+    - rank가 같으면 한쪽으로 병합
+'''
+
 # 1. 각 집합을 만들어주는 함수
 def make_set(n):
     # 1 ~ n 까지의 원소가 "각자 자기 자신이 대표자라고 설정"
@@ -11,8 +29,14 @@ def find_set(x):
     if x == parents[x]:
         return x
     
-    # x 의 부모 노드를 기준으로 다시 부모를 검색
-    return find_set(parents[x])
+    # x 의 부모노드를 기준으로 다시 부모를 검색
+    # return find_set(parents[x])
+
+    # 경로 압축 (path compression) 코드
+    # - 내가 대표자를 바로 가리키도록
+    parents[x] = find_set(parents[x])
+    return parents[x]
+
 
 # 3. 두 집합을 합치는 함수
 def union(x, y):
