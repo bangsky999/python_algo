@@ -1,17 +1,37 @@
-def per(idx):
-    # 종료 조건 : 모든 자리를 채운 경우
-    if idx == N:
-        print(*arr) # 채워진 순열을 출력
-        return
+'''
+n, m을 리스트 안에서 이진 검색으로 찾자
+sort 하고
+start = 시작점, end = 끝점 
+middle = (start+ end) // 2 까지 포함
+밑에 있다면 middle -= 1
+위에 있다면 middle += 1
+'''
+def binary_search(target, arr): # a는 찾아야할 숫자, L은 리스트
+    # 정렬된 숫자에서
+    start = 0
+    end = len(arr) - 1
     
-    # 유도조건 : idx 번째 자리에 아직 안쓴 숫자를 넣기
-    for i in range(N): # i는 0 ~ N-1
-        if not visited[i]: # i번째 숫자를 아직 사용하지 않았다면,
-            visited[i] = True # visited 채우기
-            arr[idx] = i+1 # 
-            per(idx+1)
-            visited[i] = False
-N = int(input()) # 입력 받기
-arr = [0]*N # 결과를 담을 배열 (순열 저장용)
-visited = [False]*(N+1) # 방문처리 배열
-per(0) # 재귀 시작
+    while start <= end: # 아직 탐색할 구간이 남았다면
+        mid = (start+end)//2 # 현재 구간의 중앙 인덱스
+
+        if arr[mid] == target: # 중앙값이 목표면 찾음
+            return 1
+        
+        elif arr[mid] < target: # 목표가 더 크면 오른쪽 탐색
+            start = mid + 1
+        else: # 목표가 더 작으면 왼쪽탐색
+            end = mid - 1 
+        
+    return 0
+
+
+N = int(input())
+N_nums = list(map(int,input().split()))
+N_nums.sort()
+
+M = int(input())
+M_nums = list(map(int,input().split()))
+
+for num in M_nums:
+    print(binary_search(num, N_nums))
+
